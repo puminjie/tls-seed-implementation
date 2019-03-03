@@ -1,0 +1,136 @@
+/** 
+ * @file logs.h
+ * @author Hyunwoo Lee
+ * @date 21 Feb 2018
+ * @brief This file is to define log messages
+ */
+
+#ifndef __LOG_CLIENT_H__
+#define __LOG_CLIENT_H__
+
+#include <stdio.h>
+#include <time.h>
+#include <stdlib.h>
+#include <sys/time.h>
+#include <assert.h>
+#include <errno.h>
+#include <openssl/logs.h>
+
+#ifdef DEBUG
+int log_idx;
+unsigned char ipb[4];
+#define EDGE_LOG(msg) \
+  fprintf(stderr, "[edge] %s:%s:%d %s\n", __FILE__, __func__, __LINE__, msg)
+#define EDGE_LOG1d(msg, arg1) \
+  fprintf(stderr, "[edge] %s:%s:%d %s: %d\n", __FILE__, __func__, __LINE__, msg, arg1);
+#define EDGE_LOG1x(msg, arg1) \
+  fprintf(stderr, "[edge] %s:%s:%d %s: %x\n", __FILE__, __func__, __LINE__, msg, arg1);
+#define EDGE_LOG1p(msg, arg1) \
+  fprintf(stderr, "[edge] %s:%s:%d %s: %p\n", __FILE__, __func__, __LINE__, msg, arg1);
+#define EDGE_LOG1s(msg, arg1) \
+  fprintf(stderr, "[edge] %s:%s:%d %s: %s\n", __FILE__, __func__, __LINE__, msg, arg1);
+#define EDGE_LOG1lu(msg, arg1) \
+  fprintf(stderr, "[edge] %s:%s:%d %s: %lu\n", __FILE__, __func__, __LINE__, msg, arg1);
+#define EDGE_LOG1ld(msg, arg1) \
+  fprintf(stderr, "[edge] %s:%s:%d %s: %ld\n", __FILE__, __func__, __LINE__, msg, arg1);
+#define EDGE_LOG1u(msg, arg1) \
+ fprintf(stderr, "[edge] %s:%s:%d %s: %u\n", __FILE__, __func__, __LINE__, msg, arg1);
+#define EDGE_LOGip(msg, ip) \
+  ipb[0] = ip & 0xFF; \
+  ipb[1] = (ip >> 8) & 0xFF; \
+  ipb[2] = (ip >> 16) & 0xFF; \
+  ipb[3] = (ip >> 24) & 0xFF; \
+  fprintf(stderr, "[edge] %s:%s:%d %s: %d.%d.%d.%d\n", \
+      __FILE__, __func__, __LINE__, msg, ipb[0], ipb[1], ipb[2], ipb[3]);
+#define EDGE_LOG2s(msg, arg1, arg2) \
+  fprintf(stderr, "[edge] %s:%s:%d %s (%d bytes)\n", __FILE__, __func__, __LINE__, msg, arg2); \
+  for (log_idx=0; log_idx<arg2; log_idx++) \
+  { \
+    if (log_idx % 10 == 0) \
+      fprintf(stderr, "\n"); \
+    fprintf(stderr, "%02X ", arg1[log_idx]); \
+  } \
+  fprintf(stderr, "\n");
+#define EDGE_LOGmac(msg, mac) \
+  fprintf(stderr, "[edge] %s:%s:%d %s: %x %x %x %x %x %x\n", \
+      __FILE__, __func__, __LINE__, msg, mac[0], mac[1], mac[2], mac[3], mac[4], mac[5]);
+#define EDGE_LOGinfo(ip, port) \
+  ipb[0] = ip & 0xFF; \
+  ipb[1] = (ip >> 8) & 0xFF; \
+  ipb[2] = (ip >> 16) & 0xFF; \
+  ipb[3] = (ip >> 24) & 0xFF; \
+  fprintf(stderr, "[edge] %s:%s:%d: A client is accepted from %d.%d.%d.%d:%d\n", \
+      __FILE__, __func__, __LINE__, ipb[0], ipb[1], ipb[2], ipb[3], ntohs(port));
+#else
+#define EDGE_LOG(msg)
+#define EDGE_LOG1d(msg, arg1)
+#define EDGE_LOG1x(msg, arg1)
+#define EDGE_LOG1p(msg, arg1)
+#define EDGE_LOG1s(msg, arg1)
+#define EDGE_LOG1lu(msg, arg1)
+#define EDGE_LOG1ld(msg, arg1)
+#define EDGE_LOG1u(msg, arg1)
+#define EDGE_LOGip(msg, ip)
+#define EDGE_LOG2s(msg, arg1, arg2)
+#define EDGE_LOGmac(msg, mac)
+#define EDGE_LOGinfo(ip, port)
+#endif /* DEBUG */
+
+#ifdef DEBUG
+#define PRINTK(msg, arg1, arg2) \
+  fprintf(stderr, "[edge] %s: %s (%d bytes) \n", __func__, msg, arg2); \
+  for (idx=0; idx<arg2; idx++) \
+  { \
+    if (idx % 10 == 0) \
+      fprintf(stderr, "\n"); \
+    fprintf(stderr, "%02X ", arg1[idx]); \
+  } \
+  fprintf(stderr, "\n");
+#else
+#define PRINTK(msg, arg1, arg2) 
+#endif /* DEBUG */
+
+#ifdef TIME_LOG
+int lidx;
+FILE *log_file;
+
+#define INITIALIZE_LOG(arr) \
+  for (lidx=0; lidx<NUM_OF_LOGS; lidx++) \
+    arr[lidx].time = 0; \
+
+#define PRINT_LOG(arr) ({ \
+  for ((lidx)=0; (lidx) < (NUM_OF_LOGS); (lidx)++) \
+    if (arr[lidx].time > 0) \
+      printf("%s: %lu\n", arr[lidx].name, arr[lidx].time); \
+  })
+
+#define RECORD_LOGu(arr, n) \
+  if (arr) { \
+    arr[n].name = #n; \
+    arr[n].time = get_system_time(); \
+  }
+
+/*
+#define INTERVAL(arr, a, b) \
+  if (arr) { \
+    printf("Time from %s to %s: %lu us\n", arr[a].name, arr[b].name, arr[b].time - arr[a].time); \
+  }
+*/
+
+#define FINALIZE(arr, fname) \
+  log_file = fopen(fname, "w"); \
+  for (lidx = 0; lidx < NUM_OF_LOGS; lidx++) \
+  { \
+    if (arr[lidx].time > 0) \
+      fprintf(log_file, "%lu, %d, %s\n", arr[lidx].time, lidx, arr[lidx].name); \
+  } \
+  fclose(log_file);
+#else
+#define INITIALIZE_LOG(arr)
+#define PRINT_LOG(arr)
+//#define RECORD_LOG(arr, n)
+//#define INTERVAL(arr, a, b)
+#define FINALIZE(arr, fname)
+#endif /* TIME_LOG */
+
+#endif /* __LOG_CLIENT_H__ */

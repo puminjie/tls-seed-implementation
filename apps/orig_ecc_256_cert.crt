@@ -1,0 +1,46 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 9376052230082986352 (0x821e6dd3a99b0170)
+    Signature Algorithm: ecdsa-with-SHA256
+        Issuer: C=KR, ST=Seoul, L=Seoul, O=Alice Inc., OU=Alice, CN=ca.alice.com/emailAddress=ca@alice.com
+        Validity
+            Not Before: Oct 11 10:22:06 2018 GMT
+            Not After : Oct 11 10:22:06 2019 GMT
+        Subject: C=KR, ST=Seoul, L=Seoul, O=SNU Bob Ltd., OU=SNU Bob, CN=*.bob.com/emailAddress=bob@bob.com
+        Subject Public Key Info:
+            Public Key Algorithm: id-ecPublicKey
+                Public-Key: (256 bit)
+                pub: 
+                    04:45:f7:2a:e1:ff:ed:67:65:80:22:30:85:3a:c2:
+                    66:6a:83:83:30:4c:1d:fd:47:29:b7:c8:59:ca:52:
+                    cc:05:50:3c:8e:c1:a6:1c:9c:7f:00:cb:25:de:cc:
+                    cb:08:38:e6:67:b3:76:05:5d:5c:ad:23:b3:4f:91:
+                    c5:5f:24:aa:ed
+                ASN1 OID: prime256v1
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            X509v3 Key Usage: 
+                Digital Signature
+            X509v3 Subject Alternative Name: 
+                DNS:*.origin.com
+    Signature Algorithm: ecdsa-with-SHA256
+         30:44:02:20:77:89:ad:0d:7f:ba:08:d2:13:92:fe:a0:4f:78:
+         04:3a:89:35:59:6a:04:77:91:d6:56:23:c7:cd:8c:47:58:f2:
+         02:20:2f:88:86:05:af:7b:63:2a:a1:0f:b3:f7:b8:d0:1c:a9:
+         34:44:f4:55:23:01:71:cc:a4:6d:e5:57:b6:88:55:c9
+-----BEGIN CERTIFICATE-----
+MIICNzCCAd6gAwIBAgIJAIIebdOpmwFwMAoGCCqGSM49BAMCMIGGMQswCQYDVQQG
+EwJLUjEOMAwGA1UECAwFU2VvdWwxDjAMBgNVBAcMBVNlb3VsMRMwEQYDVQQKDApB
+bGljZSBJbmMuMQ4wDAYDVQQLDAVBbGljZTEVMBMGA1UEAwwMY2EuYWxpY2UuY29t
+MRswGQYJKoZIhvcNAQkBFgxjYUBhbGljZS5jb20wHhcNMTgxMDExMTAyMjA2WhcN
+MTkxMDExMTAyMjA2WjCBhjELMAkGA1UEBhMCS1IxDjAMBgNVBAgMBVNlb3VsMQ4w
+DAYDVQQHDAVTZW91bDEVMBMGA1UECgwMU05VIEJvYiBMdGQuMRAwDgYDVQQLDAdT
+TlUgQm9iMRIwEAYDVQQDDAkqLmJvYi5jb20xGjAYBgkqhkiG9w0BCQEWC2JvYkBi
+b2IuY29tMFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAERfcq4f/tZ2WAIjCFOsJm
+aoODMEwd/Ucpt8hZylLMBVA8jsGmHJx/AMsl3szLCDjmZ7N2BV1crSOzT5HFXySq
+7aMzMDEwCQYDVR0TBAIwADALBgNVHQ8EBAMCB4AwFwYDVR0RBBAwDoIMKi5vcmln
+aW4uY29tMAoGCCqGSM49BAMCA0cAMEQCIHeJrQ1/ugjSE5L+oE94BDqJNVlqBHeR
+1lYjx82MR1jyAiAviIYFr3tjKqEPs/e40BypNET0VSMBccykbeVXtohVyQ==
+-----END CERTIFICATE-----

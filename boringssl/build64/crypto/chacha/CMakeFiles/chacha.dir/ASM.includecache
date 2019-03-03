@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../crypto/../include/openssl/arm_arch.h
+
+/home/hwlee/boringssl/build64/crypto/chacha/chacha-armv8.S
+openssl/arm_arch.h
+-
+

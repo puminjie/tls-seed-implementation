@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hwlee/boringssl/build_x86_64/crypto/cipher_extra/aes128gcmsiv-x86_64.S
+
+/home/hwlee/boringssl/build_x86_64/crypto/cipher_extra/chacha20_poly1305_x86_64.S
+
