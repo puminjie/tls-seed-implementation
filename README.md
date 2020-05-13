@@ -1,15 +1,19 @@
-# tls-seed-implementation
+# TLS-SEED implementation
 
-apps: Applications for the client and the server
+## Directories
 
-authority: Authority application that provides the domain names as well as their certificates
+* bypass: source codes to bypass syscalls used in OpenSSL for ARM TrustZone and Intel SGX
 
-boringssl: boringssl extension that involves TLS-SEED
+* client: source codes of the client implementation
 
-host: The normal world application for SEED
+* etc: source codes of the authority, the cc server, the delegated credential generator, and the key server (for keyless SSL)
 
-interceptor: The kernel module that intercepts a TCP connection for SEED
+* include: header files for implementations
 
-ta: The secure world application for SEED
+* lib: libraries for implementations
 
-vanila: The vanila cache implementation
+* platform: platform-dependent (ARM TrustZone or Intel SGX) source codes
+
+* script: scripts used for experiments
+
+* src: common source codes for SEED devices

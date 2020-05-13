@@ -1,0 +1,16 @@
+127.0.0.1   localhost
+192.168.0.67  www.edgeplatform.com
+192.168.0.67  www.doh-server.com
+
+192.168.0.67  www.alice.com
+192.168.0.67    www.bob.com # experiment
+3.101.21.28     www.bob.com # usa
+18.182.55.147   www.bob.com # jpn
+54.180.108.175  www.bob.com # kor
+192.168.0.67  www.carol.com
+
+3.101.21.28  www.keyless-ssl-key-server.com  # usa
+#18.182.55.147 www.keyless-ssl-key-server.com  # jpn
+#54.180.108.175  www.keyless-ssl-key-server.com  # kor
+
+127.0.1.1   buildroot
